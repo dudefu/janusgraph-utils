@@ -7,6 +7,11 @@ import java.util.Map.Entry;
 import com.xyshzh.janusgraph.datasource.read.Read;
 import com.xyshzh.janusgraph.datasource.read.ReadFactory;
 import com.xyshzh.janusgraph.task.Task;
+import org.apache.tinkerpop.gremlin.structure.T;
+import org.apache.tinkerpop.gremlin.structure.Vertex;
+import org.janusgraph.core.JanusGraph;
+import org.janusgraph.core.JanusGraphFactory;
+import org.janusgraph.graphdb.database.StandardJanusGraph;
 
 /**
  * 每类用于通过文本文档向JanusGraph导入数据.
@@ -53,7 +58,7 @@ public class ImportVertex implements Task {
       System.out.println("g            初始化完成......");
 
       String tempString = null; // 接收文件中每行数据,使用一变量,不需要重新生成新变量
-      while ((tempString = reader.readLine()) != null) {
+      while ((tempString = reader.readLine()) != "EXIT") {
         total.addAndGet(1); // 每读一行,计数器加一
         if (tempString.length() > 20) {
           net.sf.json.JSONObject content = null;
@@ -117,13 +122,15 @@ public class ImportVertex implements Task {
           } else {
             ;
           }
-          org.janusgraph.core.JanusGraphVertex v = null;
 
+          org.janusgraph.core.JanusGraphVertex v = null;
           try {
             if (setvertexid) { // 生成新Vertex,并指定label,id
-              v = tx.addVertex(org.apache.tinkerpop.gremlin.structure.T.label, label, org.apache.tinkerpop.gremlin.structure.T.id, id);
+              v = tx.addVertex(T.id,id, T.label,label);
+//              v = g.addV(label).property(T.id, ((StandardJanusGraph) graph).getIDManager().toVertexId(id)).next();
             } else { // 生成新Vertex,并指定label
-              v = tx.addVertex(org.apache.tinkerpop.gremlin.structure.T.label, label);
+              v = tx.addVertex(T.label,label);
+
             }
           } catch (java.lang.IllegalArgumentException e) {
             System.out.println("Current Position >> " + total.get() + " >> tempString :: " + tempString + " >> " + e.getMessage());

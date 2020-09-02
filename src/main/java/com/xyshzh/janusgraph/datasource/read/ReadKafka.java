@@ -1,12 +1,13 @@
 package com.xyshzh.janusgraph.datasource.read;
 
+import com.xyshzh.janusgraph.utils.KafkaConsumerUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import com.gl.kafka.utils.KafkaConsumerUtils;
 
 /** 数据源通用读取接口,数据源为Kafka.
  * @author Shengjun Liu

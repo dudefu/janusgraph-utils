@@ -15,6 +15,8 @@ import com.xyshzh.janusgraph.schema.BuildSchema;
  */
 public class Enter2 {
   public static void main(String[] args) {
+    args = new String[] { "--task=schema", "--conf=/Volumes/WORKS/dudefu/CompanyProject/janusgraph-utils/conf/janusgarph.properties",
+            "--file=/Volumes/WORKS/dudefu/CompanyProject/janusgraph-utils/conf/schema.json" };
 
     //    args = new String[] { "--task=schema", "--conf=/Users/liushengjun/workspace/janusgraph-utils_/src/main/resources/janusgarph.properties",
     //        "--file=/Users/liushengjun/workspace/schema.json" };
@@ -40,18 +42,18 @@ public class Enter2 {
     if (options.isSchema()) { // Schema
       new BuildSchema().execute(options.getCommonOptions().getOptionsMap());
     } else if (options.isExport()) { // 导出
-      if (Boolean.valueOf(String.class.cast(options.getCommonOptions().getOptionsMap().getOrDefault("isVertex", "false")))) { // 导出点
+      if (Boolean.parseBoolean((String) options.getCommonOptions().getOptionsMap().getOrDefault("isVertex", "false"))) { // 导出点
         new ExportVertex().execute(options.getCommonOptions().getOptionsMap());;
-      } else if (Boolean.valueOf(String.class.cast(options.getCommonOptions().getOptionsMap().getOrDefault("isEdge", "false")))) { // 导出边
+      } else if (Boolean.parseBoolean((String) options.getCommonOptions().getOptionsMap().getOrDefault("isEdge", "false"))) { // 导出边
         new ExportEdge().execute(options.getCommonOptions().getOptionsMap());
       } else {
         System.out.println("ERROR!");
         System.exit(1);
       }
     } else if (options.isImport()) { // 导入
-      if (Boolean.valueOf(String.class.cast(options.getCommonOptions().getOptionsMap().getOrDefault("isVertex", "false")))) { // 导入点
+      if (Boolean.parseBoolean((String) options.getCommonOptions().getOptionsMap().getOrDefault("isVertex", "false"))) { // 导入点
         new ImportVertex().execute(options.getCommonOptions().getOptionsMap());
-      } else if (Boolean.valueOf(String.class.cast(options.getCommonOptions().getOptionsMap().getOrDefault("isEdge", "false")))) { // 导入边
+      } else if (Boolean.parseBoolean((String) options.getCommonOptions().getOptionsMap().getOrDefault("isEdge", "false"))) { // 导入边
         new ImportEdge().execute(options.getCommonOptions().getOptionsMap());
       } else {
         System.out.println("ERROR!");

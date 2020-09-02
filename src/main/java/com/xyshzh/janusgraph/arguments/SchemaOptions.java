@@ -22,7 +22,7 @@ public class SchemaOptions {
 
   /**
    * 重新初始化参数.
-   * @param args
+   *
    */
   public void reset() {
     // 获取参数内容

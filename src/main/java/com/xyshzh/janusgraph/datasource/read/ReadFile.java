@@ -22,10 +22,10 @@ public class ReadFile implements Read {
   /**
    * 已读偏移量.
    */
-  private AtomicLong offset = new AtomicLong(0);
+  private final AtomicLong offset = new AtomicLong(0);
 
   public ReadFile(Map<String, Object> options) {
-    this(String.class.cast(options.get("file")));
+    this((String) options.get("file"));
   }
 
   public ReadFile(String filepath) {
@@ -60,7 +60,7 @@ public class ReadFile implements Read {
   @Override
   @SuppressWarnings("unchecked")
   public synchronized Long commitOffset() {
-    return new Long(offset.get());
+    return offset.get();
   }
 
   @Override

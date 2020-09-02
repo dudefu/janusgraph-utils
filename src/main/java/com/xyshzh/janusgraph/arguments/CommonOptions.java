@@ -53,17 +53,17 @@ public class CommonOptions {
   }
 
   public boolean isSchema() {
-    if ("schema".equals(this.options.getOptions())) { return true; }
+    if ("schema".equals(this.options.getOptions().get("task"))) { return true; }
     return false;
   }
 
   public boolean isImport() {
-    if ("import".equals(this.options.getOptions())) { return true; }
+    if ("import".equals(this.options.getOptions().get("task"))) { return true; }
     return false;
   }
 
   public boolean isExport() {
-    if ("export".equals(this.options.getOptions())) { return true; }
+    if ("export".equals(this.options.getOptions().get("task"))) { return true; }
     return false;
   }
 

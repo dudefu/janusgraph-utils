@@ -43,8 +43,7 @@ public final class GraphFactory implements Serializable {
   }
 
   public GraphTraversalSource getG() {
-    GraphTraversalSource g = this.graph.traversal();
-    return g;
+    return this.graph.traversal();
   }
 
   public JanusGraphTransaction getTx() {
@@ -77,8 +76,6 @@ public final class GraphFactory implements Serializable {
         properties.put((String) key, value);
         System.out.println(key + ":::" + value);
       });
-    } catch (FileNotFoundException e) {
-      e.printStackTrace();
     } catch (IOException e) {
       e.printStackTrace();
     }
